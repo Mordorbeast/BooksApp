@@ -1,7 +1,10 @@
 package com.example.booksapp.Activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.booksapp.Fragments.Login
+import com.example.booksapp.Fragments.Register
 import com.example.booksapp.R
 
 /**
@@ -11,12 +14,40 @@ import com.example.booksapp.R
  * @author Pablo y Xavi
  * @version 1.0
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Login.OnButtonPressedListener, Register.OnButtonPressedListener {
+
+    override fun onButtonPressed(text: String) {
+
+        when(text){
+            "registrate" -> {
+                val regisFrag = Register()
+            supportFragmentManager.beginTransaction().replace(R.id.main_container, regisFrag).commit()
+            }
+            "sesion" -> {
+                val intent = Intent(this, MenuBooks::class.java)
+                startActivity(intent)
+            }
+            "login" -> {
+                val loginFrag = Login()
+                supportFragmentManager.beginTransaction().replace(R.id.main_container, loginFrag).commit()
+            }
+
+            "loginRegistrado" -> {
+                val loginFrag = Login()
+                supportFragmentManager.beginTransaction().replace(R.id.main_container, loginFrag).commit()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        if(savedInstanceState == null){
+            val loginFrag = Login()
+            supportFragmentManager.beginTransaction().add(R.id.main_container, loginFrag).commit()
+        }
         buscarLibros()
     }
 
