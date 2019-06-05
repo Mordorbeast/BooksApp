@@ -1,7 +1,8 @@
-package com.example.booksapp
+package com.example.booksapp.Activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.booksapp.R
 
 /**
  * Muestra una imagen del logo y una barra de busqueda que te permite buscar
