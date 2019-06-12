@@ -8,19 +8,38 @@ import android.widget.BaseAdapter
 import com.example.booksapp.Model.Book
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fila_listview_fav.view.*
-import kotlinx.android.synthetic.main.fragment_detail_book.view.*
 
-class Adapter(private val context: Context, private val books: ArrayList<Book>) : BaseAdapter() {
+class Adapter(private val context: Context, books: ArrayList<Book>) : BaseAdapter() {
 
-    override fun getView(position: Int, convertView: View?, viewGrup: ViewGroup?): View {
+    private var auxArrayBooks: java.util.ArrayList<Book> = arrayListOf(Book("",arrayOf(""),"","",""))
+    private var auxArrayBooks2: java.util.ArrayList<Book> = books
+    //private var ingredientesReceta: ArrayList<Alimento> = arrayListOf(Alimento("","",""))
 
-        val layoutInflater = LayoutInflater.from(context)
-        val fila = viewGrup?: layoutInflater.inflate(R.layout.fila_listview_fav, viewGrup, false)
+    init {
+        auxArrayBooks.clear()
+        auxArrayBooks.addAll(books)
+    }
 
-        //fila.imagenFilaFav.setImage(books[position].linkImagen)
-        fila.tituloFav.text = books[position].titulo
+    override fun getView(position: Int, convertView: View?, viewGroup: ViewGroup?): View {
 
-        for (i in books[position].autors){
+        //val layoutInflater = LayoutInflater.from(context)
+        //val fila = viewGrup?: layoutInflater.inflate(R.layout.fila_listview_fav, viewGroup, false)
+
+
+        val fila: View
+
+        fila = if(convertView == null){
+            val layoutInflater = LayoutInflater.from(context)
+            layoutInflater.inflate(R.layout.fila_listview_fav, viewGroup, false)
+        }else{
+            convertView
+        }
+
+        //fila.imagenFilaFav.setImage(auxArrayBooks2[position].linkImagen)
+        fila.tituloFav.text = auxArrayBooks2[position].titulo
+
+        //cada vez que se llama al adapter hace esto y suma al texto los autores todoo el rato :V
+        for (i in auxArrayBooks2[position].autors){
              fila.autorFav.text = fila.autorFav.text.toString().plus(",").plus(i)
         }
 
@@ -28,7 +47,7 @@ class Adapter(private val context: Context, private val books: ArrayList<Book>) 
     }
 
     override fun getItem(position: Int): Any {
-        return books[position]
+        return auxArrayBooks2[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -37,7 +56,25 @@ class Adapter(private val context: Context, private val books: ArrayList<Book>) 
     }
 
     override fun getCount(): Int {
-        return books.size
+        return auxArrayBooks2.size
+    }
+
+    fun filtro(palabrasBuscador:String ){
+        val palabras = palabrasBuscador.toLowerCase()
+
+        auxArrayBooks2.clear()
+
+        if(palabras.isEmpty()){
+            auxArrayBooks2.addAll(auxArrayBooks)
+        }else{
+            for (book in auxArrayBooks){
+                if(book.titulo.toLowerCase().contains(palabras)){
+                    auxArrayBooks2.add(book)
+                }
+            }
+        }
+
+        notifyDataSetChanged()
     }
 
 }
