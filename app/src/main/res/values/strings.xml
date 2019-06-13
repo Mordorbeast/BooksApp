@@ -3,4 +3,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_nombre_vacio">Nombre no puede estar vacio</string>
+    <string name="error_contra_vacia">Contraseña no puede estar vacia</string>
+    <string name="error_contra_ocho">Contraseña tiene que tener minimo 8 caracteres</string>
+    <string name="error_contra_noigual">Contraseña tiene que ser la misma</string>
+    <string name="error_logearse">Este nombre de usuario o contraseña no existen</string>
 </resources>

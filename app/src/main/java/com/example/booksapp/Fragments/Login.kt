@@ -3,26 +3,21 @@ package com.example.booksapp.Fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.booksapp.Model.User
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_register.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class Login : Fragment() {
 
     private lateinit var listener : OnButtonPressedListener
+    var usuarioCorrecto = false
 
     interface OnButtonPressedListener {
         fun onButtonPressed(text: String)
@@ -44,13 +39,33 @@ class Login : Fragment() {
         }
 
         IniciarSesionL.setOnClickListener{
-            listener.onButtonPressed("sesion")
+
+            comprobarUsuario()
+            if(usuarioCorrecto){
+                listener.onButtonPressed("sesion")
+            }else{
+                nombre.error = getString(R.string.error_logearse)
+            }
+
         }
     }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         listener = activity as OnButtonPressedListener
+    }
+
+    fun comprobarUsuario(){
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        ///get data
+        if(sharedPref.contains("users")) {
+            val nombreUsuario = sharedPref.getString("users", "")
+            if(nombreUsuario!!.equals(nombre.text.toString())){
+                usuarioCorrecto = true
+            }
+        }
+        val str_name = sharedPref.getString("users", null)
+        Toast.makeText(context, str_name, Toast.LENGTH_LONG).show()
     }
 
 

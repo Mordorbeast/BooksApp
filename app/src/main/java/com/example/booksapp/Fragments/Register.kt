@@ -3,27 +3,22 @@ package com.example.booksapp.Fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.booksapp.Model.User
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fragment_register.*
-import java.util.regex.Pattern
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class Register : Fragment() {
 
     private lateinit var listener : OnButtonPressedListener
+    var user: User? = null
+    var listUsers:ArrayList<User> = ArrayList()
 
     interface OnButtonPressedListener {
         fun onButtonPressed(text: String)
@@ -41,62 +36,41 @@ class Register : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         RegistrateR.setOnClickListener{
-/*
             var contraOK = false
             var contra2OK = false
-            var emailOK = false
+            var nombreOK = false
 
-            if(registrarse_email.text.isEmpty()){
-                registrarse_email.error = getString(R.string.error_noVacio)
+            if(nombreR.text.isEmpty()){
+                nombreR.error = getString(R.string.error_nombre_vacio)
             }else{
+                nombreOK = true
+            }
 
-                if ( !Pattern.compile(".+@.+\\..+").matcher(registrarse_email.text).matches()) {
-                    registrarse_email.error = getString(R.string.error_formatoIncorrecto)
+            if(ContrasenaR.text.isEmpty()){
+                ContrasenaR.error = getString(R.string.error_contra_vacia)
+            }else{
+                if (ContrasenaR.length() >= 8) {
+                    contraOK = true
                 }else{
-                    emailOK = true
+                    ContrasenaR.error = getString(R.string.error_contra_ocho)
                 }
             }
 
-            if(registrarse_contrasena.text.isEmpty()){
-                registrarse_contrasena.error = getString(R.string.error_noVacio)
-            }else{
-                if (registrarse_contrasena.length() >= 8) {
-                    if (registrarse_contrasena.text.toString().contains("[0-9]".toRegex())) {
-                        if (registrarse_contrasena.text.toString().contains("[a-zA-Z]".toRegex())) {
-                            contraOK = true
-                        }else{
-                            registrarse_contrasena.error = getString(R.string.error_min1letra)
-                        }
-                    }else{
-                        registrarse_contrasena.error = getString(R.string.error_min1num)
-                    }
-                }else{
-                    registrarse_contrasena.error = getString(R.string.error_min8caracteres)
-                }
-            }
-
-            if(registrarse_repetir_contrasena.text.isEmpty()){
-                registrarse_repetir_contrasena.error = getString(R.string.error_noVacio)
-            }else{
-                if (registrarse_repetir_contrasena.length() >= 8) {
-                    if(registrarse_repetir_contrasena.text.toString() == registrarse_contrasena.text.toString()){
+            if(repetirContrasenaR.text.isEmpty()){
+                repetirContrasenaR.error = getString(R.string.error_contra_vacia)
+            }else {
+                if (repetirContrasenaR.length() >= 8) {
+                    if (repetirContrasenaR.text.toString() == ContrasenaR.text.toString()) {
                         contra2OK = true
-                    }else{
-                        registrarse_repetir_contrasena.error = getString(R.string.error_contrasDif)
+                    } else {
+                        repetirContrasenaR.error = getString(R.string.error_contra_noigual)
                     }
-                }else{
-                    registrarse_repetir_contrasena.error = getString(R.string.error_min8caracteres)
                 }
-
             }
 
-            if(contraOK && emailOK && contra2OK){
-                registrarUsuario()
+            if(contraOK && nombreOK && contra2OK){
+                registrarUsuario(nombreR.text.toString(), ContrasenaR.text.toString())
             }
-*/
-
-
-
             listener.onButtonPressed("loginRegistrado")
         }
 
@@ -107,6 +81,19 @@ class Register : Fragment() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         listener = activity as OnButtonPressedListener
+    }
+
+    fun registrarUsuario(nombre: String, contrasena: String) {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        user = User(nombreR.text.toString(), ContrasenaR.text.toString())
+        listUsers.add(user!!)
+
+        sharedPref.edit().putString("users", listUsers[0].nombre).apply()
+        
+        ///get data
+
+        val str_name = sharedPref.getString("users", null)
+        Toast.makeText(context, str_name, Toast.LENGTH_LONG).show()
     }
 
 }

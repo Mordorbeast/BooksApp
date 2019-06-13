@@ -3,6 +3,8 @@ package com.example.booksapp.Fragments
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -39,6 +41,8 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+
 
 
         val book1 = Book("libro1","","patatas","hortaliza","sdg")
