@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import android.widget.SearchView
 import com.example.booksapp.Model.Book
 import com.example.booksapp.R
 import com.example.booksapp.adapters.Adapter
+import kotlinx.android.synthetic.main.fragment_login.*
 import org.json.JSONObject
 import java.net.URL
 
@@ -42,16 +44,23 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        ///get data
+        val nombreUsuario = sharedPref.getString("nombreUser", null)
+        val listaGuardadosFavs = sharedPref.getString("listaFavs", null)
+        val listaFavs = ArrayList<Book>()
 
+        if(nombreUsuario!!.isNotEmpty()) {
+            val favsArray = nombreUsuario.split("!-!")
 
-
-        val book1 = Book("libro1","","patatas","hortaliza","sdg")
-        val book2 = Book("libro2","a2","patatas","hortaliza","sdg")
-        val book3 = Book("libro3","","patatas","hortaliza","sdg")
-
-        val books = arrayListOf(book1,book2,book3)
-
-        customAdapter = Adapter(context!!, books)
+            for(i in 0 until favsArray.size){
+                if(favsArray[i].isNotEmpty()){
+                    val detallesLibro = favsArray[i].split("!/!")
+                    listaFavs.add((Book(detallesLibro[0], detallesLibro[1], detallesLibro[2])))
+                }
+            }
+            customAdapter = Adapter(context!!, listaFavs)
+        }
 
         val listView = view!!.findViewById<ListView>(R.id.listaFavs)
 
@@ -59,10 +68,8 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
 
 
         listView.setOnItemClickListener{ _, _, position, _ ->
-           listener.onButtonPressed(books[position].titulo)
+           listener.onButtonPressed(listaFavs[position].titulo)
         }
-
-
 
         val searchView = view!!.findViewById<SearchView>(R.id.buscador)
         searchView.setOnQueryTextListener(this)

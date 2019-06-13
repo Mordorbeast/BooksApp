@@ -58,13 +58,15 @@ class Login : Fragment() {
     fun comprobarUsuario(){
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         ///get data
-        if(sharedPref.contains("users")) {
-            val nombreUsuario = sharedPref.getString("users", "")
-            if(nombreUsuario!!.equals(nombre.text.toString())){
+        val nombreUsuario = sharedPref.getString(nombre.text.toString(), null)
+        val contraUsuario = sharedPref.getString(contrasenaL.text.toString(), null)
+        if(sharedPref.contains(nombre.text.toString()) && sharedPref.contains(contrasenaL.text.toString())) {
+            if (nombreUsuario!! == nombre.text.toString() && contraUsuario!! == contrasenaL.text.toString()) {
                 usuarioCorrecto = true
             }
         }
-        val str_name = sharedPref.getString("users", null)
+
+        val str_name = sharedPref.getString("nombreUser", null)
         Toast.makeText(context, str_name, Toast.LENGTH_LONG).show()
     }
 

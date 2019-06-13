@@ -40,16 +40,6 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener {
             val favBooks = FavBooks()
             supportFragmentManager.beginTransaction().add(com.example.booksapp.R.id.menu_container, favBooks).commit()
         }
-
-        val datos = this.getSharedPreferences("BOOKSAPP", Context.MODE_PRIVATE) ?: return
-        with(datos.edit()){
-
-        }
-        val str = datos.getString("name", "hola")
-
-        /*putString("hola", tituloFav.text.toString())
-        datos.edit().apply()*/
-
     }
 
     private fun openDetail(){

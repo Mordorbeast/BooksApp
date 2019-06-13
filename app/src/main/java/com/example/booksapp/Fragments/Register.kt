@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_register.*
 class Register : Fragment() {
 
     private lateinit var listener : OnButtonPressedListener
-    var user: User? = null
     var listUsers:ArrayList<User> = ArrayList()
 
     interface OnButtonPressedListener {
@@ -70,8 +69,8 @@ class Register : Fragment() {
 
             if(contraOK && nombreOK && contra2OK){
                 registrarUsuario(nombreR.text.toString(), ContrasenaR.text.toString())
+                listener.onButtonPressed("loginRegistrado")
             }
-            listener.onButtonPressed("loginRegistrado")
         }
 
         yaTienesCuentaR.setOnClickListener{
@@ -85,14 +84,16 @@ class Register : Fragment() {
 
     fun registrarUsuario(nombre: String, contrasena: String) {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        user = User(nombreR.text.toString(), ContrasenaR.text.toString())
-        listUsers.add(user!!)
+        val user = User(nombreR.text.toString(), ContrasenaR.text.toString())
+        //listUsers.add(user!!)
 
-        sharedPref.edit().putString("users", listUsers[0].nombre).apply()
+        sharedPref.edit().putString(nombre, user.nombre).apply()
+        sharedPref.edit().putString(contrasena, user.contrasena).apply()
+
         
         ///get data
 
-        val str_name = sharedPref.getString("users", null)
+        val str_name = sharedPref.getString(nombreR.text.toString(), null)
         Toast.makeText(context, str_name, Toast.LENGTH_LONG).show()
     }
 
