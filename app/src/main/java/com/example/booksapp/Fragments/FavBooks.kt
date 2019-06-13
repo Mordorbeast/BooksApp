@@ -13,6 +13,8 @@ import android.widget.SearchView
 import com.example.booksapp.Model.Book
 import com.example.booksapp.R
 import com.example.booksapp.adapters.Adapter
+import org.json.JSONObject
+import java.net.URL
 
 
 private const val ARG_PARAM1 = "param1"

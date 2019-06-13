@@ -19,12 +19,12 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppThemeNo)
+//        setTheme(R.style.AppThemeNo)
         super.onCreate(savedInstanceState)
         setContentView(com.example.booksapp.R.layout.activity_menu_books)
 
-        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
-        setSupportActionBar(toolbar)
+//        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
+//        setSupportActionBar(toolbar)
 
         if(savedInstanceState == null){
             val favBooks = FavBooks()
