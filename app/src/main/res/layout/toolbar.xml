@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:id="@+id/my_toolbar"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:background="?attr/colorPrimaryDark"
+                                             android:elevation="4dp"
+                                             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                                             app:titleTextColor="@android:color/white"
+                                             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+</android.support.constraint.ConstraintLayout>

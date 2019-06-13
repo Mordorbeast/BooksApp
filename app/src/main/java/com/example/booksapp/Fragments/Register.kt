@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fragment_register.*
+import java.util.regex.Pattern
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -40,6 +41,62 @@ class Register : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         RegistrateR.setOnClickListener{
+/*
+            var contraOK = false
+            var contra2OK = false
+            var emailOK = false
+
+            if(registrarse_email.text.isEmpty()){
+                registrarse_email.error = getString(R.string.error_noVacio)
+            }else{
+
+                if ( !Pattern.compile(".+@.+\\..+").matcher(registrarse_email.text).matches()) {
+                    registrarse_email.error = getString(R.string.error_formatoIncorrecto)
+                }else{
+                    emailOK = true
+                }
+            }
+
+            if(registrarse_contrasena.text.isEmpty()){
+                registrarse_contrasena.error = getString(R.string.error_noVacio)
+            }else{
+                if (registrarse_contrasena.length() >= 8) {
+                    if (registrarse_contrasena.text.toString().contains("[0-9]".toRegex())) {
+                        if (registrarse_contrasena.text.toString().contains("[a-zA-Z]".toRegex())) {
+                            contraOK = true
+                        }else{
+                            registrarse_contrasena.error = getString(R.string.error_min1letra)
+                        }
+                    }else{
+                        registrarse_contrasena.error = getString(R.string.error_min1num)
+                    }
+                }else{
+                    registrarse_contrasena.error = getString(R.string.error_min8caracteres)
+                }
+            }
+
+            if(registrarse_repetir_contrasena.text.isEmpty()){
+                registrarse_repetir_contrasena.error = getString(R.string.error_noVacio)
+            }else{
+                if (registrarse_repetir_contrasena.length() >= 8) {
+                    if(registrarse_repetir_contrasena.text.toString() == registrarse_contrasena.text.toString()){
+                        contra2OK = true
+                    }else{
+                        registrarse_repetir_contrasena.error = getString(R.string.error_contrasDif)
+                    }
+                }else{
+                    registrarse_repetir_contrasena.error = getString(R.string.error_min8caracteres)
+                }
+
+            }
+
+            if(contraOK && emailOK && contra2OK){
+                registrarUsuario()
+            }
+*/
+
+
+
             listener.onButtonPressed("loginRegistrado")
         }
 

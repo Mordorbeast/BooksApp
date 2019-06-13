@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fila_listview_fav.view.*
 
 class Adapter(private val context: Context, books: ArrayList<Book>) : BaseAdapter() {
 
-    private var auxArrayBooks: java.util.ArrayList<Book> = arrayListOf(Book("",arrayOf(""),"","",""))
+    private var auxArrayBooks: ArrayList<Book> = arrayListOf(Book("","","","",""))
     private var auxArrayBooks2: java.util.ArrayList<Book> = books
     //private var ingredientesReceta: ArrayList<Alimento> = arrayListOf(Alimento("","",""))
 
@@ -35,13 +35,17 @@ class Adapter(private val context: Context, books: ArrayList<Book>) : BaseAdapte
             convertView
         }
 
-        //fila.imagenFilaFav.setImage(auxArrayBooks2[position].linkImagen)
-        fila.tituloFav.text = auxArrayBooks2[position].titulo
+            //fila.imagenFilaFav.setImage(auxArrayBooks2[position].linkImagen)
+            fila.tituloFav.text = auxArrayBooks2[position].titulo
+
+
+
+
+
+
 
         //cada vez que se llama al adapter hace esto y suma al texto los autores todoo el rato :V
-        for (i in auxArrayBooks2[position].autors){
-             fila.autorFav.text = fila.autorFav.text.toString().plus(",").plus(i)
-        }
+
 
         return fila
     }
