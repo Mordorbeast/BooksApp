@@ -22,6 +22,7 @@ import java.lang.reflect.Type
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val bookRecibido = "wfdd"
+private const val userLogeado = "asdasd"
 
 /**
  * A simple [Fragment] subclass.
@@ -30,6 +31,7 @@ private const val bookRecibido = "wfdd"
 class DetailBook : Fragment() {
 
     var libro = "dsns"
+    var user = "dfskjf"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -40,14 +42,16 @@ class DetailBook : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             libro = it.getString(bookRecibido)!!
+            user = it.getString(userLogeado)!!
         }
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(libro: String) =
+        fun newInstance(user: String, libro: String) =
             DetailBook().apply {
                 arguments = Bundle().apply {
+                    putString(userLogeado, user)
                     putString(bookRecibido, libro)
                 }
             }
@@ -62,14 +66,14 @@ class DetailBook : Fragment() {
 
         val type = object: TypeToken<ArrayList<Book>>() {}.type
         val gson = Gson()
-        val json = sharedPref.getString("FAVBOOKS"+"nombre", null)
+        val json = sharedPref.getString("FAVBOOKS$user", null)
 
         val nuevoFav:ArrayList<Book> = gson.fromJson(json, type)
 
         nuevoFav.add(Book("autor4", "descrip4"))
 
         val jsonAdd = gson.toJson(nuevoFav)
-        sharedPref.edit().putString("FAVBOOKS"+"nombre", jsonAdd).apply()
+        sharedPref.edit().putString("FAVBOOKS$user", jsonAdd).apply()
 
 
         titulo.text = libro

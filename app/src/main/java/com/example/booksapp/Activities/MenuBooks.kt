@@ -49,7 +49,7 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener {
     private fun openDetail(){
 
 
-        val detail = DetailBook.newInstance(bookRecibido)
+        val detail = DetailBook.newInstance(userLogeado, bookRecibido)
         supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, detail).commit()
 
 
