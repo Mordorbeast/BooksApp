@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.example.booksapp.Model.User
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_register.*
+import org.json.JSONObject
 
 class Login : Fragment() {
 
@@ -40,11 +42,13 @@ class Login : Fragment() {
 
         IniciarSesionL.setOnClickListener{
 
-            comprobarUsuario()
-            if(usuarioCorrecto){
-                listener.onButtonPressed("sesion")
-            }else{
-                nombre.error = getString(R.string.error_logearse)
+            if(nombre.text.isNotEmpty() && contrasenaL.text.isNotEmpty()) {
+                comprobarUsuario()
+                if (usuarioCorrecto) {
+                    listener.onButtonPressed("sesion")
+                } else {
+                    nombre.error = getString(R.string.error_logearse)
+                }
             }
 
         }
@@ -58,16 +62,27 @@ class Login : Fragment() {
     fun comprobarUsuario(){
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         ///get data
-        val nombreUsuario = sharedPref.getString(nombre.text.toString(), null)
-        val contraUsuario = sharedPref.getString(contrasenaL.text.toString(), null)
-        if(sharedPref.contains(nombre.text.toString()) && sharedPref.contains(contrasenaL.text.toString())) {
-            if (nombreUsuario!! == nombre.text.toString() && contraUsuario!! == contrasenaL.text.toString()) {
-                usuarioCorrecto = true
+        if(sharedPref != null) {
+            val outputMap: HashMap<String, String> = HashMap()
+            val jsonString = sharedPref.getString("Usuarios", null)
+            val jsonObject = JSONObject(jsonString)
+            //iteramos el jsonObject para obtener todos sus claves y valores
+            val keysItr = jsonObject.keys()
+            while (keysItr.hasNext()) {
+                val k = keysItr.next()
+                val v = jsonObject.get(k).toString()
+                outputMap[k] = v
+
+                Log.d("Login", "nomMap: " + outputMap[nombre.text.toString()] + " nom: " + nombre.text.toString() + " contraMap: " + outputMap["contra_" + nombre.text.toString()] + " contra: " + contrasenaL.text.toString())
+
+                if (outputMap[nombre.text.toString()] == nombre.text.toString() && outputMap["contra_" + nombre.text.toString()] == contrasenaL.text.toString()) {
+                    usuarioCorrecto = true
+                } else {
+                    usuarioCorrecto = false
+                    nombre.error = getString(R.string.nombre_repe)
+                }
             }
         }
-
-        val str_name = sharedPref.getString("nombreUser", null)
-        Toast.makeText(context, str_name, Toast.LENGTH_LONG).show()
     }
 
 

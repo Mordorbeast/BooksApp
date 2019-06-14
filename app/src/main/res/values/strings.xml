@@ -8,4 +8,5 @@
     <string name="error_contra_ocho">Contraseña tiene que tener minimo 8 caracteres</string>
     <string name="error_contra_noigual">Contraseña tiene que ser la misma</string>
     <string name="error_logearse">Este nombre de usuario o contraseña no existen</string>
+    <string name="nombre_repe">Ya existe este nombre de usuario escoge otro</string>
 </resources>

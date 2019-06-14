@@ -12,12 +12,15 @@ import android.widget.Toast
 import com.example.booksapp.Model.User
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fragment_register.*
+import org.json.JSONObject
+import android.util.Log
 
 
 class Register : Fragment() {
 
     private lateinit var listener : OnButtonPressedListener
     var listUsers:ArrayList<User> = ArrayList()
+    var nombreRepe = false
 
     interface OnButtonPressedListener {
         fun onButtonPressed(text: String)
@@ -48,7 +51,7 @@ class Register : Fragment() {
             if(ContrasenaR.text.isEmpty()){
                 ContrasenaR.error = getString(R.string.error_contra_vacia)
             }else{
-                if (ContrasenaR.length() >= 8) {
+                if (ContrasenaR.length() >= 2) {
                     contraOK = true
                 }else{
                     ContrasenaR.error = getString(R.string.error_contra_ocho)
@@ -58,7 +61,7 @@ class Register : Fragment() {
             if(repetirContrasenaR.text.isEmpty()){
                 repetirContrasenaR.error = getString(R.string.error_contra_vacia)
             }else {
-                if (repetirContrasenaR.length() >= 8) {
+                if (repetirContrasenaR.length() >= 2) {
                     if (repetirContrasenaR.text.toString() == ContrasenaR.text.toString()) {
                         contra2OK = true
                     } else {
@@ -69,7 +72,9 @@ class Register : Fragment() {
 
             if(contraOK && nombreOK && contra2OK){
                 registrarUsuario(nombreR.text.toString(), ContrasenaR.text.toString())
-                listener.onButtonPressed("loginRegistrado")
+                if(!nombreRepe){
+                    listener.onButtonPressed("loginRegistrado")
+                }
             }
         }
 
@@ -84,17 +89,41 @@ class Register : Fragment() {
 
     fun registrarUsuario(nombre: String, contrasena: String) {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        val user = User(nombreR.text.toString(), ContrasenaR.text.toString())
+        //val user = User(nombreR.text.toString(), ContrasenaR.text.toString())
         //listUsers.add(user!!)
+        if(sharedPref != null) {
+            val outputMap: HashMap<String, String> = HashMap()
+            var jsonStringR = sharedPref.getString("Usuarios", null)
+            //Convertimos el String obtenido a un JSONObject
+            if(jsonStringR == null) {
+                jsonStringR = "{admin=admin, contra_admin=12345678}"
+            }
+                val jsonObjectR = JSONObject(jsonStringR)
 
-        sharedPref.edit().putString(nombre, user.nombre).apply()
-        sharedPref.edit().putString(contrasena, user.contrasena).apply()
+                Log.d("Register", jsonStringR)
 
-        
-        ///get data
+                //Si el nombre user introducido es igual a uno guardado en shared preferences no deja registrarse
+                if (!jsonStringR!!.contains(nombreR.text.toString())) {
+                    nombreRepe = false
+                    //iteramos el jsonObject para obtener todos sus claves y valores
+                    val keysItr = jsonObjectR.keys()
+                    while (keysItr.hasNext()) {
+                        val k = keysItr.next()
+                        val v = jsonObjectR.get(k).toString()
+                        outputMap[k] = v
+                    }
+                    outputMap[nombreR.text.toString()] = nombreR.text.toString()
+                    outputMap["contra_" + nombreR.text.toString()] = ContrasenaR.text.toString()
 
-        val str_name = sharedPref.getString(nombreR.text.toString(), null)
-        Toast.makeText(context, str_name, Toast.LENGTH_LONG).show()
+                    val jsonString = outputMap.toString()
+                    sharedPref.edit().putString("Usuarios", jsonString).apply()
+
+                } else {
+                    nombreRepe = true
+                    nombreR.error = getString(R.string.nombre_repe)
+                }
+
+        }
     }
 
 }
