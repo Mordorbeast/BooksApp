@@ -23,10 +23,6 @@ class MainActivity : AppCompatActivity(), Login.OnButtonPressedListener, Registe
                 val regisFrag = Register()
             supportFragmentManager.beginTransaction().replace(R.id.main_container, regisFrag).commit()
             }
-            "sesion" -> {
-                val intent = Intent(this, MenuBooks::class.java)
-                startActivity(intent)
-            }
             "login" -> {
                 val loginFrag = Login()
                 supportFragmentManager.beginTransaction().replace(R.id.main_container, loginFrag).commit()
@@ -35,6 +31,11 @@ class MainActivity : AppCompatActivity(), Login.OnButtonPressedListener, Registe
             "loginRegistrado" -> {
                 val loginFrag = Login()
                 supportFragmentManager.beginTransaction().replace(R.id.main_container, loginFrag).commit()
+            }
+            else -> {
+                val intent = Intent(this, MenuBooks::class.java)
+                intent.putExtra("USERNAME", text)
+                startActivity(intent)
             }
         }
     }

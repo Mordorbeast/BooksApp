@@ -19,7 +19,8 @@ import org.json.JSONObject
 class Login : Fragment() {
 
     private lateinit var listener : OnButtonPressedListener
-    var usuarioCorrecto = false
+    private var user:String = ""
+    private var usuarioCorrecto = false
 
     interface OnButtonPressedListener {
         fun onButtonPressed(text: String)
@@ -45,7 +46,7 @@ class Login : Fragment() {
             if(nombre.text.isNotEmpty() && contrasenaL.text.isNotEmpty()) {
                 comprobarUsuario()
                 if (usuarioCorrecto) {
-                    listener.onButtonPressed("sesion")
+                    listener.onButtonPressed(user)
                 } else {
                     nombre.error = getString(R.string.error_logearse)
                 }
@@ -76,6 +77,7 @@ class Login : Fragment() {
                 Log.d("Login", "nomMap: " + outputMap[nombre.text.toString()] + " nom: " + nombre.text.toString() + " contraMap: " + outputMap["contra_" + nombre.text.toString()] + " contra: " + contrasenaL.text.toString())
 
                 if (outputMap[nombre.text.toString()] == nombre.text.toString() && outputMap["contra_" + nombre.text.toString()] == contrasenaL.text.toString()) {
+                    user = nombre.text.toString()
                     usuarioCorrecto = true
                 } else {
                     usuarioCorrecto = false

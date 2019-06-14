@@ -18,6 +18,7 @@ import android.content.SharedPreferences.Editor as SharedPreferencesEditor
 class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener {
 
     private lateinit var bookRecibido:String
+    private var userLogeado = ""
 
 
     override fun onButtonPressed(book: String) {
@@ -31,14 +32,17 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
 //        setTheme(R.style.AppThemeNo)
         super.onCreate(savedInstanceState)
-        setContentView(com.example.booksapp.R.layout.activity_menu_books)
+        setContentView(R.layout.activity_menu_books)
+
+        userLogeado = intent.getStringExtra(("USERNAME"))
+
 
 //        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
 //        setSupportActionBar(toolbar)
 
         if(savedInstanceState == null){
-            val favBooks = FavBooks()
-            supportFragmentManager.beginTransaction().add(com.example.booksapp.R.id.menu_container, favBooks).commit()
+            val favBooks = FavBooks.newInstance(userLogeado)
+            supportFragmentManager.beginTransaction().add(R.id.menu_container, favBooks).commit()
         }
     }
 
