@@ -1,19 +1,12 @@
 package com.example.booksapp.Activities
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import android.view.View
-import android.widget.Toast
 import com.example.booksapp.Fragments.DetailBook
 import com.example.booksapp.Fragments.FavBooks
 import com.example.booksapp.Fragments.ResultsBooks
 import com.example.booksapp.Model.Book
 import com.example.booksapp.R
-import kotlinx.android.synthetic.main.fila_listview_fav.*
-import kotlinx.android.synthetic.main.toolbar.*
 import android.content.SharedPreferences.Editor as SharedPreferencesEditor
 
 
@@ -43,19 +36,40 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, Results
 //        setSupportActionBar(toolbar)
 
         if (savedInstanceState == null) {
-            val favBooks = FavBooks.newInstance(userLogeado)
-            supportFragmentManager.beginTransaction().add(R.id.menu_container, favBooks).addToBackStack(null).commit()
+            if(isLargeScreen()){
+                val favBooksLarge = FavBooks.newInstance(userLogeado)
+                    supportFragmentManager.beginTransaction().add(R.id.listLarge, favBooksLarge).addToBackStack(null).commit()
+            }else{
+                val favBooks = FavBooks.newInstance(userLogeado)
+                supportFragmentManager.beginTransaction().add(R.id.menu_container, favBooks).addToBackStack(null).commit()
+            }
         }
     }
 
     private fun openDetail() {
-        val detail = DetailBook.newInstance(userLogeado, bookRecibido)
-        supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, detail).addToBackStack(null).commit()
+        if(isLargeScreen()){
+            val detailLarge = DetailBook.newInstance(userLogeado, bookRecibido)
+            supportFragmentManager.beginTransaction().add(R.id.detailLarge, detailLarge).addToBackStack(null).commit()
+        }else{
+            val detail = DetailBook.newInstance(userLogeado, bookRecibido)
+            supportFragmentManager.beginTransaction().replace(R.id.menu_container, detail).addToBackStack(null).commit()
+        }
+
     }
 
     private fun openResultsBooks(book: String) {
-        val result = ResultsBooks.newInstance(book)
-        supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, result).commit()
+        if(isLargeScreen()){
+            val result = ResultsBooks.newInstance(book)
+            supportFragmentManager.beginTransaction().replace(R.id.listLarge, result).addToBackStack(null).commit()
+        }else{
+            val result = ResultsBooks.newInstance(book)
+            supportFragmentManager.beginTransaction().replace(R.id.menu_container, result).addToBackStack(null).commit()
+        }
+
+    }
+
+    private fun isLargeScreen(): Boolean {
+        return resources.getBoolean(R.bool.large)
     }
 }
 
