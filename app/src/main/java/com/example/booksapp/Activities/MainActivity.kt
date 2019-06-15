@@ -19,22 +19,22 @@ class MainActivity : AppCompatActivity(), Login.OnButtonPressedListener, Registe
     override fun onButtonPressed(text: String) {
 
         when(text){
-            "registrate" -> {
+            getString(R.string.registrate) -> {
                 val regisFrag = Register()
             supportFragmentManager.beginTransaction().replace(R.id.main_container, regisFrag).commit()
             }
-            "login" -> {
+            getString(R.string.login) -> {
                 val loginFrag = Login()
                 supportFragmentManager.beginTransaction().replace(R.id.main_container, loginFrag).commit()
             }
 
-            "loginRegistrado" -> {
+            getString(R.string.loginRegistrado) -> {
                 val loginFrag = Login()
                 supportFragmentManager.beginTransaction().replace(R.id.main_container, loginFrag).commit()
             }
             else -> {
                 val intent = Intent(this, MenuBooks::class.java)
-                intent.putExtra("USERNAME", text)
+                intent.putExtra(getString(R.string.USERNAME), text)
                 startActivity(intent)
             }
         }

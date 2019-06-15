@@ -18,7 +18,6 @@ class Login : Fragment() {
     private lateinit var listener : OnButtonPressedListener
     private var user:String = ""
     private var usuarioCorrecto = false
-    private var nombreOK = false
 
     interface OnButtonPressedListener {
         fun onButtonPressed(text: String)
@@ -36,7 +35,7 @@ class Login : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         noTienesCuentaL.setOnClickListener{
-            listener.onButtonPressed("registrate")
+            listener.onButtonPressed(getString(R.string.registrate))
         }
 
         IniciarSesionL.setOnClickListener{
@@ -64,9 +63,9 @@ class Login : Fragment() {
         ///get data
         if(sharedPref != null) {
             val outputMap: HashMap<String, String> = HashMap()
-            var jsonString = sharedPref.getString("Usuarios", null)
+            var jsonString = sharedPref.getString(getString(R.string.Usuarios), null)
             if(jsonString == null) {
-                jsonString = "{admin=admin, contra_admin=12345678}"
+                jsonString = getString(R.string.jsonString)
             }
             val jsonObject = JSONObject(jsonString)
             //iteramos el jsonObject para obtener todos sus claves y valores
@@ -75,10 +74,12 @@ class Login : Fragment() {
                 val k = keysItr.next()
                 val v = jsonObject.get(k).toString()
                 outputMap[k] = v
-
-                Log.d("Login", "nomMap: " + outputMap[nombre.text.toString()] + " nom: " + nombre.text.toString() + " contraMap: " + outputMap["contra_" + nombre.text.toString()] + " contra: " + contrasenaL.text.toString())
-
-                if (outputMap[nombre.text.toString()] == nombre.text.toString() && outputMap["contra_" + nombre.text.toString()] == contrasenaL.text.toString()) {
+/*
+                Log.d("Login", "nomMap: " + outputMap[nombre.text.toString()] + getString(R.string.nom) + nombre.text.toString() + getString(
+                                    R.string.conraMap) + outputMap[getString(R.string.contra_) + nombre.text.toString()] + getString(
+                                    R.string.contra) + contrasenaL.text.toString())
+*/
+                if (outputMap[nombre.text.toString()] == nombre.text.toString() && outputMap[getString(R.string.contra_) + nombre.text.toString()] == contrasenaL.text.toString()) {
                     user = nombre.text.toString()
                     usuarioCorrecto = true
                 } else {

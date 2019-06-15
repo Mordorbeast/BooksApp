@@ -28,7 +28,7 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, Results
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_books)
 
-        userLogeado = intent.getStringExtra(("USERNAME"))
+        userLogeado = intent.getStringExtra((getString(R.string.USERNAME)))
 
 
         if(isLargeScreen()){
@@ -44,10 +44,10 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, Results
     private fun openDetail() {
         if(isLargeScreen()){
             val detailLarge = DetailBook.newInstance(userLogeado, bookRecibido)
-            supportFragmentManager.beginTransaction().replace(R.id.detailLarge, detailLarge, "detailLarge").addToBackStack(null).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.detailLarge, detailLarge, getString(R.string.detailLarge)).addToBackStack(null).commit()
         }else{
             val detail = DetailBook.newInstance(userLogeado, bookRecibido)
-            supportFragmentManager.beginTransaction().replace(R.id.menu_container, detail, "detail").addToBackStack(null).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.menu_container, detail, getString(R.string.detail)).addToBackStack(null).commit()
         }
 
     }
@@ -55,10 +55,10 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, Results
     private fun openResultsBooks(book: String) {
         if(isLargeScreen()){
             val resultLarge = ResultsBooks.newInstance(book)
-            supportFragmentManager.beginTransaction().replace(R.id.listLarge, resultLarge, "resultLarge").addToBackStack(null).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.listLarge, resultLarge, getString(R.string.resultLarge)).addToBackStack(null).commit()
         }else{
             val result = ResultsBooks.newInstance(book)
-            supportFragmentManager.beginTransaction().replace(R.id.menu_container, result, "result").addToBackStack(null).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.menu_container, result, getString(R.string.result)).addToBackStack(null).commit()
         }
 
     }

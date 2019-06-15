@@ -67,35 +67,35 @@ class ResultsBooks : Fragment() {
         }
 
         doAsync {
-            val apiResponse = URL("https://www.googleapis.com/books/v1/volumes?q=$book").readText()
+            val apiResponse = URL(getString(R.string.URLAPI) + book).readText()
             //Log.d("ResultBooks", apiResponse)
             uiThread {
                 val jsonObj = JSONObject(apiResponse)
 
-                val items = jsonObj.getJSONArray("items")
+                val items = jsonObj.getJSONArray(getString(R.string.items))
 
                 for (i in 0 until items.length()) {
                     val libroJson = items.getJSONObject(i)
-                    val volumeInfo = libroJson.getJSONObject("volumeInfo")
+                    val volumeInfo = libroJson.getJSONObject(getString(R.string.volumeInfo))
 
-                    val titulo = volumeInfo.getString("title")
-                    Log.d("ResultBooks", "titulo: " + titulo)
+                    val titulo = volumeInfo.getString(getString(R.string.title))
+                    //Log.d("ResultBooks", "titulo: " + titulo)
                     var description: String
 
-                    description = if (volumeInfo.has("description")) {
-                        volumeInfo.getString("description")
+                    description = if (volumeInfo.has(getString(R.string.description))) {
+                        volumeInfo.getString(getString(R.string.description))
                     } else {
-                        "Este libro no tiene descripcion"
+                        getString(R.string.noDesc)
                     }
-                    Log.d("ResultBooks", "description: " + description)
+                    //Log.d("ResultBooks", "description: " + description)
 
 
                     var imagen = ""
-                    if(volumeInfo.getJSONObject("imageLinks") != null){
-                        val imageLinks = volumeInfo.getJSONObject("imageLinks")
-                        Log.d("ResultBooks", "imagenLink: " + imageLinks)
-                        imagen = imageLinks.getString("smallThumbnail")
-                        Log.d("ResultBooks", "imagen: " + imagen)
+                    if(volumeInfo.getJSONObject(getString(R.string.imageLinks)) != null){
+                        val imageLinks = volumeInfo.getJSONObject(getString(R.string.imageLinks))
+                        //Log.d("ResultBooks", "imagenLink: " + imageLinks)
+                        imagen = imageLinks.getString(getString(R.string.smallThumbnail))
+                        //Log.d("ResultBooks", "imagen: " + imagen)
                     }
 
                     resultBooksList.add(Book(titulo, description, imagen))
@@ -103,9 +103,10 @@ class ResultsBooks : Fragment() {
                     customAdapter = ResultsAdapter(context!!, resultBooksList)
                     listView.adapter=customAdapter
                 }
+                /*
                 for (i in 0 until resultBooksList.size) {
                     Log.d("ResultBooks", "array: " + resultBooksList[i].titulo)
-                }
+                } */
             }
         }
     }

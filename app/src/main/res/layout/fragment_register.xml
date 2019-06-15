@@ -5,7 +5,7 @@
              android:layout_height="match_parent"
              tools:context=".Fragments.Register">
     <Button
-            android:text="Registrate"
+            android:text="@string/registrate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/RegistrateR" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
@@ -19,7 +19,7 @@
             android:id="@+id/nombreR"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toTopOf="parent" android:hint="Nombre Usuario"
+            app:layout_constraintTop_toTopOf="parent" android:hint="@string/nombre_usuario"
             app:layout_constraintHorizontal_bias="0.0"/>
     <EditText
             android:layout_width="0dp"
@@ -29,7 +29,7 @@
             android:id="@+id/ContrasenaR"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/nombreR" android:hint="Contraseña"/>
+            app:layout_constraintTop_toBottomOf="@+id/nombreR" android:hint="@string/contrasena"/>
     <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -38,9 +38,9 @@
             android:id="@+id/repetirContrasenaR" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/ContrasenaR" android:hint="Repite la contraseña"/>
+            app:layout_constraintTop_toBottomOf="@+id/ContrasenaR" android:hint="@string/repite_la_contrase_a"/>
     <Button
-            android:text="Ya tienes cuenta?"
+            android:text="@string/ya_tienes_cuenta"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/yaTienesCuentaR" android:layout_marginTop="16dp"

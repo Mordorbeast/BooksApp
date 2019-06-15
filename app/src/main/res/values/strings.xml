@@ -9,4 +9,35 @@
     <string name="error_contra_noigual">Contraseña tiene que ser la misma</string>
     <string name="error_logearse">Este nombre de usuario o contraseña no existen</string>
     <string name="nombre_repe">Ya existe este nombre de usuario escoge otro</string>
+    <string name="registrate">registrate</string>
+    <string name="login">login</string>
+    <string name="loginRegistrado">loginRegistrado</string>
+    <string name="USERNAME">USERNAME</string>
+    <string name="detailLarge">detailLarge</string>
+    <string name="detail">detail</string>
+    <string name="resultLarge">resultLarge</string>
+    <string name="result">result</string>
+    <string name="FAVBOOKS">FAVBOOKS</string>
+    <string name="contra_">contra_</string>
+    <string name="contra">contra:</string>
+    <string name="nom">nom:</string>
+    <string name="conraMap">contraMap:</string>
+    <string name="Usuarios">Usuarios</string>
+    <string name="jsonString">{admin=admin, contra_admin=12345678}</string>
+    <string name="URLAPI">https://www.googleapis.com/books/v1/volumes?q=</string>
+    <string name="items">items</string>
+    <string name="volumeInfo">volumeInfo</string>
+    <string name="title">title</string>
+    <string name="description">description</string>
+    <string name="noDesc">Este libro no tiene descripcion</string>
+    <string name="imageLinks">imageLinks</string>
+    <string name="smallThumbnail">smallThumbnail</string>
+    <string name="titulo">titulo</string>
+    <string name="nombre_usuario">Nombre Usuario</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="iniciar_sesion">Iniciar sesion</string>
+    <string name="no_tienes_cuenta_registrate">No tienes cuenta? Registrate</string>
+    <string name="repite_la_contrase_a">Repite la contraseña</string>
+    <string name="ya_tienes_cuenta">Ya tienes cuenta?</string>
+    <string name="a_adirfav">añadirFav</string>
 </resources>
