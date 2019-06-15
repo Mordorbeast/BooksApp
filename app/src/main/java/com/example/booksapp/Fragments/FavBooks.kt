@@ -8,19 +8,15 @@ import android.content.SharedPreferences.Editor
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.SearchView
 import com.example.booksapp.Model.Book
-import com.example.booksapp.R
 import com.example.booksapp.adapters.Adapter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.fragment_login.*
-import org.json.JSONObject
-import java.net.URL
+import android.view.*
+import android.view.MenuInflater
+import android.widget.Toast
 
 
 private const val userLogeado = "usuario"
@@ -40,11 +36,13 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fav_books, container, false)
+        return inflater.inflate(com.example.booksapp.R.layout.fragment_fav_books, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        //setSupportActionBar(my_toolbar as Toolbar)
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         ///get data
@@ -62,7 +60,7 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
         customAdapter = Adapter(context!!, nuevoFav)
 
 
-        val listView = view!!.findViewById<ListView>(R.id.listaFavs)
+        val listView = view!!.findViewById<ListView>(com.example.booksapp.R.id.listaFavs)
 
         listView.adapter=customAdapter
 
@@ -71,13 +69,14 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
            listener.onButtonPressed(nuevoFav[position].titulo)
         }
 
-        val searchView = view!!.findViewById<SearchView>(R.id.buscador)
+        val searchView = view!!.findViewById<SearchView>(com.example.booksapp.R.id.buscador)
         searchView.setOnQueryTextListener(this)
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             user = it.getString(userLogeado)!!
         }
