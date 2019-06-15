@@ -41,6 +41,7 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(false)
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fav_books, container, false)
     }

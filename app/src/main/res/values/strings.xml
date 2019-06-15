@@ -40,4 +40,6 @@
     <string name="repite_la_contrase_a">Repite la contraseña</string>
     <string name="ya_tienes_cuenta">Ya tienes cuenta?</string>
     <string name="a_adirfav">añadirFav</string>
+    <string name="borrar_fav">Borrado de favoritos</string>
+    <string name="anadir_fav">Añadido a favoritos</string>
 </resources>

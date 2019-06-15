@@ -9,11 +9,11 @@ import com.example.booksapp.Model.Book
 import com.example.booksapp.R
 import android.content.SharedPreferences.Editor as SharedPreferencesEditor
 
+private lateinit var bookRecibido: Book
+private var userLogeado = ""
 
 class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, ResultsBooks.OnButtonPressedListener {
 
-    private lateinit var bookRecibido: Book
-    private var userLogeado = ""
 
     override fun onItemPressed(bookData: Book) {
         bookRecibido = bookData
