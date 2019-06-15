@@ -3,20 +3,15 @@ package com.example.booksapp.Fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.booksapp.Model.Book
 import com.example.booksapp.R
-import android.R.id.edit
-import android.content.SharedPreferences
 import android.util.Log
 import android.widget.ListView
 import com.example.booksapp.adapters.ResultsAdapter
-import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_detail_book.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.json.JSONObject
@@ -77,14 +72,7 @@ class ResultsBooks : Fragment() {
             uiThread {
                 val jsonObj = JSONObject(apiResponse)
 
-
-
                 val items = jsonObj.getJSONArray("items")
-                //Log.d("ResultBooks", items[0].toString())
-                //Log.d("ResultBooks", items[1].toString())
-                //Log.d("ResultBooks", items[2].toString())
-
-                Log.d("ResultBooks", apiResponse)
 
                 for (i in 0 until items.length()) {
                     val libroJson = items.getJSONObject(i)
@@ -102,22 +90,18 @@ class ResultsBooks : Fragment() {
                     Log.d("ResultBooks", "description: " + description)
 
 
-
-
-
-                    val imageLinks = volumeInfo.getJSONObject("imageLinks")
-                    var imagen: String
-                    Log.d("ResultBooks", "imagenLink: " + imageLinks)
-                    imagen = imageLinks.getString("smallThumbnail")
-                    Log.d("ResultBooks", "imagen: " + imagen)
-
+                    var imagen = ""
+                    if(volumeInfo.getJSONObject("imageLinks") != null){
+                        val imageLinks = volumeInfo.getJSONObject("imageLinks")
+                        Log.d("ResultBooks", "imagenLink: " + imageLinks)
+                        imagen = imageLinks.getString("smallThumbnail")
+                        Log.d("ResultBooks", "imagen: " + imagen)
+                    }
 
                     resultBooksList.add(Book(titulo, description, imagen))
 
                     customAdapter = ResultsAdapter(context!!, resultBooksList)
                     listView.adapter=customAdapter
-
-
                 }
                 for (i in 0 until resultBooksList.size) {
                     Log.d("ResultBooks", "array: " + resultBooksList[i].titulo)
