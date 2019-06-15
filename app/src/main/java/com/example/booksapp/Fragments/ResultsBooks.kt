@@ -28,7 +28,7 @@ private const val claveBusqueda = "param1"
 class ResultsBooks : Fragment() {
 
     interface OnButtonPressedListener{
-        fun onButtonPressed(book: Book)
+        fun onItemPressed(bookdata: Book)
     }
 
     private lateinit var listener : OnButtonPressedListener
@@ -68,7 +68,7 @@ class ResultsBooks : Fragment() {
         val resultBooksList = ArrayList<Book>()
 
         listView.setOnItemClickListener{ _, _, position, _ ->
-            listener.onButtonPressed(resultBooksList[position])
+            listener.onItemPressed(resultBooksList[position])
         }
 
         doAsync {

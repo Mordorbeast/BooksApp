@@ -2,6 +2,7 @@ package com.example.booksapp.Fragments
 
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
@@ -18,15 +19,10 @@ import org.json.JSONObject
 import java.lang.reflect.Type
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val bookRecibido = "wfdd"
 private const val userLogeado = "asdasd"
 
-/**
- * A simple [Fragment] subclass.
- *
- */
+
 class DetailBook : Fragment() {
 
     var libro = "dsns"
@@ -41,7 +37,7 @@ class DetailBook : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            libro = it.getString(bookRecibido)!!
+            //libro = it.getParcelable(bookRecibido)
             user = it.getString(userLogeado)!!
         }
     }
@@ -65,11 +61,11 @@ class DetailBook : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(user: String, libro: String) =
+        fun newInstance(user: String, libro: Book) =
             DetailBook().apply {
                 arguments = Bundle().apply {
                     putString(userLogeado, user)
-                    putString(bookRecibido, libro)
+                    putParcelable(bookRecibido, libro)
                 }
             }
     }

@@ -18,21 +18,18 @@ import android.content.SharedPreferences.Editor as SharedPreferencesEditor
 
 
 class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, ResultsBooks.OnButtonPressedListener {
-    override fun onButtonPressed(book: Book) {
 
-    }
-
-    private lateinit var bookRecibido: String
+    private lateinit var bookRecibido: Book
     private var userLogeado = ""
 
 
+    override fun onItemPressed(bookdata: Book) {
+        bookRecibido = bookdata
+        openDetail()
+    }
+
     override fun onButtonPressed(book: String) {
         openResultsBooks(book)
-        /*bookRecibido = book
-        saveData("titulo", bookRecibido)
-        getData("titulo")
-        Toast.makeText(this, getData("titulo"), Toast.LENGTH_LONG).show()*/
-        //openDetail()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
