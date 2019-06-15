@@ -44,18 +44,18 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, Results
 
         if (savedInstanceState == null) {
             val favBooks = FavBooks.newInstance(userLogeado)
-            supportFragmentManager.beginTransaction().add(R.id.menu_container, favBooks).commit()
+            supportFragmentManager.beginTransaction().add(R.id.menu_container, favBooks).addToBackStack(null).commit()
         }
     }
 
     private fun openDetail() {
         val detail = DetailBook.newInstance(userLogeado, bookRecibido)
-        supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, detail).commit()
+        supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, detail).addToBackStack(null).commit()
     }
 
     private fun openResultsBooks(book: String) {
         val result = ResultsBooks.newInstance(book)
-        supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, result).commit()
+        supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, result).addToBackStack(null).commit()
     }
 }
 

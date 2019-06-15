@@ -70,6 +70,11 @@ class DetailBook : Fragment() {
                     }
                     val jsonChange = gson.toJson(nuevoFav)
                     sharedPref.edit().putString("FAVBOOKS$user", jsonChange).apply()
+                }else{
+                    val nuevoFav = ArrayList<Book>()
+                    nuevoFav.add(Book(libro.titulo, libro.descripcion, libro.linkImage))
+                    val jsonChange = gson.toJson(nuevoFav)
+                    sharedPref.edit().putString("FAVBOOKS$user", jsonChange).apply()
                 }
                 true
             }
