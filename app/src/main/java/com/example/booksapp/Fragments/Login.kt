@@ -21,6 +21,7 @@ class Login : Fragment() {
     private lateinit var listener : OnButtonPressedListener
     private var user:String = ""
     private var usuarioCorrecto = false
+    private var nombreOK = false
 
     interface OnButtonPressedListener {
         fun onButtonPressed(text: String)
@@ -86,7 +87,7 @@ class Login : Fragment() {
                     usuarioCorrecto = true
                 } else {
                     usuarioCorrecto = false
-                    nombre.error = getString(R.string.nombre_repe)
+                    //nombre.error = getString(R.string.nombre_repe)
                 }
             }
         }

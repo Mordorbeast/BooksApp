@@ -51,7 +51,7 @@ class DetailBook : Fragment() {
         return when (item.itemId) {
             com.example.booksapp.R.id.addFav_actionbar
             -> {
-                val toast = Toast.makeText(context,"favorito", Toast.LENGTH_SHORT)
+                val toast = Toast.makeText(context,"Añadido a favorito", Toast.LENGTH_SHORT)
                 toast.show()
 
                 val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)

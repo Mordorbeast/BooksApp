@@ -25,7 +25,7 @@ class ResultsAdapter(private val context: Context, private val books: ArrayList<
 
         fila.tituloFav.text = books[position].titulo
         Glide.with(context)
-            .load(books[position].linkImagen)
+            .load(books[position].linkImage)
             .into(fila.imagenFilaFav)
 
         return fila
