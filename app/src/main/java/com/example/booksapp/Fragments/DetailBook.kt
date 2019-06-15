@@ -53,20 +53,24 @@ class DetailBook : Fragment() {
             -> {
                 val toast = Toast.makeText(context,"favorito", Toast.LENGTH_SHORT)
                 toast.show()
-                    val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
 
-                    val type = object: TypeToken<ArrayList<Book>>() {}.type
-                    val gson = Gson()
-                    val json = sharedPref.getString("FAVBOOKS$user", null)
-                    val nuevoFav:ArrayList<Book> = gson.fromJson(json, type)
+                val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
 
-                    if(json!!.contains(libro.titulo)){
+                val type = object: TypeToken<ArrayList<Book>>() {}.type
+                val gson = Gson()
+                val json = sharedPref.getString("FAVBOOKS$user", null)
+
+                if(json!=null) {
+                    val nuevoFav: ArrayList<Book> = gson.fromJson(json, type)
+
+                    if (json!!.contains(libro.titulo)) {
                         nuevoFav.remove(Book(libro.titulo, libro.descripcion, libro.linkImage))
-                    }else{
+                    } else {
                         nuevoFav.add(Book(libro.titulo, libro.descripcion, libro.linkImage))
                     }
                     val jsonChange = gson.toJson(nuevoFav)
                     sharedPref.edit().putString("FAVBOOKS$user", jsonChange).apply()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
