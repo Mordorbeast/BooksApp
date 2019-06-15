@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fila_listview_fav.view.*
 
 class Adapter(private val context: Context, books: ArrayList<Book>) : BaseAdapter() {
 
-    private var auxArrayBooks: ArrayList<Book> = arrayListOf(Book("","",""))
+    private var auxArrayBooks: ArrayList<Book> = arrayListOf(Book("",""))
     private var auxArrayBooks2: java.util.ArrayList<Book> = books
     //private var ingredientesReceta: ArrayList<Alimento> = arrayListOf(Alimento("","",""))
 
