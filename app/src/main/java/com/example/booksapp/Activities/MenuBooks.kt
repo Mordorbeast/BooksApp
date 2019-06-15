@@ -10,13 +10,17 @@ import android.widget.Toast
 import com.example.booksapp.Fragments.DetailBook
 import com.example.booksapp.Fragments.FavBooks
 import com.example.booksapp.Fragments.ResultsBooks
+import com.example.booksapp.Model.Book
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fila_listview_fav.*
 import kotlinx.android.synthetic.main.toolbar.*
 import android.content.SharedPreferences.Editor as SharedPreferencesEditor
 
 
-class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener {
+class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, ResultsBooks.OnButtonPressedListener {
+    override fun onButtonPressed(book: Book) {
+
+    }
 
     private lateinit var bookRecibido: String
     private var userLogeado = ""

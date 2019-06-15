@@ -16,6 +16,7 @@ import android.util.Log
 import android.widget.ListView
 import com.example.booksapp.adapters.ResultsAdapter
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_detail_book.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.json.JSONObject
@@ -25,6 +26,12 @@ import java.net.URL
 private const val claveBusqueda = "param1"
 
 class ResultsBooks : Fragment() {
+
+    interface OnButtonPressedListener{
+        fun onButtonPressed(book: Book)
+    }
+
+    private lateinit var listener : OnButtonPressedListener
 
     private var book:String = ""
     lateinit var customAdapter : ResultsAdapter
@@ -58,6 +65,11 @@ class ResultsBooks : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         val listView = view!!.findViewById<ListView>(R.id.listaResults)
+        val resultBooksList = ArrayList<Book>()
+
+        listView.setOnItemClickListener{ _, _, position, _ ->
+            listener.onButtonPressed(resultBooksList[position])
+        }
 
         doAsync {
             val apiResponse = URL("https://www.googleapis.com/books/v1/volumes?q=$book").readText()
@@ -65,14 +77,14 @@ class ResultsBooks : Fragment() {
             uiThread {
                 val jsonObj = JSONObject(apiResponse)
 
-                val resultBooksList = ArrayList<Book>()
+
 
                 val items = jsonObj.getJSONArray("items")
                 //Log.d("ResultBooks", items[0].toString())
                 //Log.d("ResultBooks", items[1].toString())
                 //Log.d("ResultBooks", items[2].toString())
 
-                //Log.d("ResultBooks", apiResponse)
+                Log.d("ResultBooks", apiResponse)
 
                 for (i in 0 until items.length()) {
                     val libroJson = items.getJSONObject(i)
@@ -88,7 +100,19 @@ class ResultsBooks : Fragment() {
                         "Este libro no tiene descripcion"
                     }
                     Log.d("ResultBooks", "description: " + description)
-                    resultBooksList.add(Book(titulo, description))
+
+
+
+
+
+                    val imageLinks = volumeInfo.getJSONObject("imageLinks")
+                    var imagen: String
+                    Log.d("ResultBooks", "imagen: " + imageLinks)
+                    imagen = imageLinks.getJSONArray("smallThumbnail").getString(0)
+
+
+
+                    resultBooksList.add(Book(titulo, description, imagen))
 
                     customAdapter = ResultsAdapter(context!!, resultBooksList)
                     listView.adapter=customAdapter
@@ -100,5 +124,10 @@ class ResultsBooks : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        listener = activity as OnButtonPressedListener
     }
 }

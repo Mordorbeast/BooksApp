@@ -87,7 +87,7 @@ class DetailBook : Fragment() {
 
         val nuevoFav:ArrayList<Book> = gson.fromJson(json, type)
 
-        nuevoFav.add(Book("autor4", "descrip4"))
+        nuevoFav.add(Book("autor4", "descrip4", ""))
 
         val jsonAdd = gson.toJson(nuevoFav)
         sharedPref.edit().putString("FAVBOOKS$user", jsonAdd).apply()

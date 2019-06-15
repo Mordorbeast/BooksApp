@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.bumptech.glide.Glide
 import com.example.booksapp.Model.Book
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fila_listview_fav.view.*
@@ -23,6 +24,9 @@ class ResultsAdapter(private val context: Context, private val books: ArrayList<
         }
 
         fila.tituloFav.text = books[position].titulo
+        Glide.with(context)
+            .load(books[position].linkImagen)
+            .into(fila.imagenFilaFav)
 
         return fila
     }
