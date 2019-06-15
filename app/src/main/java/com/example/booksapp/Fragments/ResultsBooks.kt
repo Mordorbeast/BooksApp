@@ -28,7 +28,7 @@ private const val claveBusqueda = "param1"
 class ResultsBooks : Fragment() {
 
     interface OnButtonPressedListener{
-        fun onItemPressed(bookdata: Book)
+        fun onItemPressed(bookData: Book)
     }
 
     private lateinit var listener : OnButtonPressedListener

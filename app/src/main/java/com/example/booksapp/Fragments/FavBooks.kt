@@ -30,6 +30,7 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
 
     interface OnButtonPressedListener{
         fun onButtonPressed(book: String)
+        fun onItemPressed(bookData: Book)
     }
 
     private lateinit var listener : OnButtonPressedListener
@@ -69,7 +70,7 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
 
 
         listView.setOnItemClickListener{ _, _, position, _ ->
-           listener.onButtonPressed(nuevoFav[position].titulo)
+           listener.onItemPressed(nuevoFav[position])
         }
 
         val searchView = view!!.findViewById<SearchView>(R.id.buscador)

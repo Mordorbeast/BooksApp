@@ -22,9 +22,8 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, Results
     private lateinit var bookRecibido: Book
     private var userLogeado = ""
 
-
-    override fun onItemPressed(bookdata: Book) {
-        bookRecibido = bookdata
+    override fun onItemPressed(bookData: Book) {
+        bookRecibido = bookData
         openDetail()
     }
 
