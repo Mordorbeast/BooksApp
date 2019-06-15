@@ -75,10 +75,6 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
         val searchView = view!!.findViewById<SearchView>(R.id.buscador)
         searchView.setOnQueryTextListener(this)
 
-        buscador.setOnClickListener{
-            listener.onButtonPressed("result")
-        }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,6 +105,7 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextChange(newText: String): Boolean {
         customAdapter.filtro(newText)
+        listener.onButtonPressed(newText)
         return false
     }
 }

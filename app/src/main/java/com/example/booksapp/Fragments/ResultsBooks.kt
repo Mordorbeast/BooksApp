@@ -20,10 +20,11 @@ import org.json.JSONObject
 import java.net.URL
 
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val claveBusqueda = "param1"
 
 class ResultsBooks : Fragment() {
+
+    private var book:String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,11 +34,28 @@ class ResultsBooks : Fragment() {
         return inflater.inflate(R.layout.fragment_results_books, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            book = it.getString(claveBusqueda)!!
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(book: String) =
+            ResultsBooks().apply {
+                arguments = Bundle().apply {
+                    putString(claveBusqueda, book)
+                }
+            }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         doAsync {
-            val apiResponse = URL("https://www.googleapis.com/books/v1/volumes?q=harry").readText()
+            val apiResponse = URL("https://www.googleapis.com/books/v1/volumes?q=$book").readText()
             Log.d("ResultBooks", apiResponse)
             uiThread {
                 val jsonObj = JSONObject(apiResponse)

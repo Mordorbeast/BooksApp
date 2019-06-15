@@ -18,12 +18,12 @@ import android.content.SharedPreferences.Editor as SharedPreferencesEditor
 
 class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener {
 
-    private lateinit var bookRecibido:String
+    private lateinit var bookRecibido: String
     private var userLogeado = ""
 
 
     override fun onButtonPressed(book: String) {
-        openResultsBooks()
+        openResultsBooks(book)
         /*bookRecibido = book
         saveData("titulo", bookRecibido)
         getData("titulo")
@@ -42,57 +42,20 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener {
 //        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
 //        setSupportActionBar(toolbar)
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             val favBooks = FavBooks.newInstance(userLogeado)
             supportFragmentManager.beginTransaction().add(R.id.menu_container, favBooks).commit()
         }
     }
 
-    private fun openDetail(){
+    private fun openDetail() {
         val detail = DetailBook.newInstance(userLogeado, bookRecibido)
         supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, detail).commit()
     }
 
-    private fun openResultsBooks(){
-        val result = ResultsBooks()
+    private fun openResultsBooks(book: String) {
+        val result = ResultsBooks.newInstance(book)
         supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, result).commit()
     }
-
-    //saving data
-    fun saveData(KEY_NAME: String, value: String) {
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
-         //?: return
-        /*with(sharedPref.edit()) {
-            putString("TITULO", bookRecibido)
-            apply()
-        }*/
-        val editor: SharedPreferencesEditor = sharedPref.edit()
-
-        editor.putString(KEY_NAME, value)
-        editor.apply()
-    }
-
-    fun getData(KEY_NAME: String): String? {
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
-        //val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
-
-        val str_name = sharedPref.getString("TITULO", "")
-        return sharedPref.getString(KEY_NAME, null)
-
-    }
-
-    fun clearData(){
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
-        val editor: SharedPreferencesEditor = sharedPref.edit()
-        editor.clear()
-        editor.apply()
-
-    }
-
-    fun removeData(KEY_NAME: String) {
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = sharedPref.edit()
-        editor.remove(KEY_NAME)
-        editor.apply()
-    }
 }
+
