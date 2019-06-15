@@ -99,13 +99,13 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
         listener = activity as OnButtonPressedListener
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
+    override fun onQueryTextSubmit(query: String): Boolean {
+        customAdapter.filtro(query)
+        listener.onButtonPressed(query)
         return false
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
-        customAdapter.filtro(newText)
-        listener.onButtonPressed(newText)
         return false
     }
 }
