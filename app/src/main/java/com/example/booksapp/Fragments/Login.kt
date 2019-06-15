@@ -50,6 +50,8 @@ class Login : Fragment() {
                 } else {
                     nombre.error = getString(R.string.error_logearse)
                 }
+            }else{
+                nombre.error = getString(R.string.error_nombre_vacio)
             }
 
         }

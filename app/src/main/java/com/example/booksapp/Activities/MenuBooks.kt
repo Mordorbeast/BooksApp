@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.booksapp.Fragments.DetailBook
 import com.example.booksapp.Fragments.FavBooks
+import com.example.booksapp.Fragments.ResultsBooks
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fila_listview_fav.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -22,10 +23,11 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener {
 
 
     override fun onButtonPressed(book: String) {
-        bookRecibido = book
+        openResultsBooks()
+        /*bookRecibido = book
         saveData("titulo", bookRecibido)
         getData("titulo")
-        Toast.makeText(this, getData("titulo"), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getData("titulo"), Toast.LENGTH_LONG).show()*/
         //openDetail()
     }
 
@@ -47,12 +49,13 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener {
     }
 
     private fun openDetail(){
-
-
         val detail = DetailBook.newInstance(userLogeado, bookRecibido)
         supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, detail).commit()
+    }
 
-
+    private fun openResultsBooks(){
+        val result = ResultsBooks()
+        supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, result).commit()
     }
 
     //saving data

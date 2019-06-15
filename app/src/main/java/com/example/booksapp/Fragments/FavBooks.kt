@@ -18,6 +18,7 @@ import com.example.booksapp.R
 import com.example.booksapp.adapters.Adapter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.android.synthetic.main.fragment_fav_books.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.json.JSONObject
 import java.net.URL
@@ -73,6 +74,10 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
 
         val searchView = view!!.findViewById<SearchView>(R.id.buscador)
         searchView.setOnQueryTextListener(this)
+
+        buscador.setOnClickListener{
+            listener.onButtonPressed("result")
+        }
 
     }
 

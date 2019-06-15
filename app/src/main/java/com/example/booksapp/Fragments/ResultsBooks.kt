@@ -12,7 +12,12 @@ import com.example.booksapp.Model.Book
 import com.example.booksapp.R
 import android.R.id.edit
 import android.content.SharedPreferences
+import android.util.Log
 import com.google.gson.Gson
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import org.json.JSONObject
+import java.net.URL
 
 
 private const val ARG_PARAM1 = "param1"
@@ -31,7 +36,22 @@ class ResultsBooks : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val resultadoLibro:ArrayList<Book> = arrayListOf(Book("autor1", "descrip1"), Book("autor2", "descrip2"), Book("autor3", "descrip3"))
+        doAsync {
+            val apiResponse = URL("https://www.googleapis.com/books/v1/volumes?q=harry").readText()
+            Log.d("ResultBooks", apiResponse)
+            uiThread {
+                val jsonObj = JSONObject(apiResponse)
+
+                var resultBooksList = ArrayList<Book>()
+
+                val items = jsonObj.getJSONArray("items")
+                Log.d("ResultBooks", items[0].toString())
+                Log.d("ResultBooks", items[1].toString())
+                Log.d("ResultBooks", items[2].toString())
+
+                Log.d("ResultBooks", apiResponse)
+            }
+        }
     }
 
 
