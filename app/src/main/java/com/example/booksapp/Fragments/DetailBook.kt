@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import com.example.booksapp.Activities.MenuBooks
 import com.example.booksapp.Model.Book
 import com.example.booksapp.R
@@ -34,6 +33,7 @@ class DetailBook : Fragment() {
     var user = "dfskjf"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail_book, container, false)
     }
@@ -43,6 +43,23 @@ class DetailBook : Fragment() {
         arguments?.let {
             libro = it.getString(bookRecibido)!!
             user = it.getString(userLogeado)!!
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(com.example.booksapp.R.menu.toolbar,menu) // TU MENU
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            com.example.booksapp.R.id.addFav_actionbar
+            -> {
+                val toast = Toast.makeText(context,"favorito", Toast.LENGTH_SHORT)
+                toast.show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
