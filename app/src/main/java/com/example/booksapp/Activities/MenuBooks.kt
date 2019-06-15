@@ -55,7 +55,7 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, Results
 
     private fun openResultsBooks(book: String) {
         val result = ResultsBooks.newInstance(book)
-        supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, result).addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().replace(com.example.booksapp.R.id.menu_container, result).commit()
     }
 }
 

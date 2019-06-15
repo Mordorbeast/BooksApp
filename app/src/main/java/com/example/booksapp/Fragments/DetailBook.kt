@@ -2,21 +2,15 @@ package com.example.booksapp.Fragments
 
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
-import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.Toast
-import com.example.booksapp.Activities.MenuBooks
 import com.example.booksapp.Model.Book
 import com.example.booksapp.R
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_detail_book.*
-import kotlinx.android.synthetic.main.toolbar.*
-import org.json.JSONObject
-import java.lang.reflect.Type
 
 
 private const val bookRecibido = "wfdd"
