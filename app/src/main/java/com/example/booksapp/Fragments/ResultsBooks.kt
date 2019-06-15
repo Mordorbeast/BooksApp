@@ -107,9 +107,9 @@ class ResultsBooks : Fragment() {
 
                     val imageLinks = volumeInfo.getJSONObject("imageLinks")
                     var imagen: String
-                    Log.d("ResultBooks", "imagen: " + imageLinks)
-                    imagen = imageLinks.getJSONArray("smallThumbnail").getString(0)
-
+                    Log.d("ResultBooks", "imagenLink: " + imageLinks)
+                    imagen = imageLinks.getString("smallThumbnail")
+                    Log.d("ResultBooks", "imagen: " + imagen)
 
 
                     resultBooksList.add(Book(titulo, description, imagen))
