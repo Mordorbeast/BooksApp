@@ -81,4 +81,9 @@ class Adapter(private val context: Context, books: ArrayList<Book>) : BaseAdapte
         notifyDataSetChanged()
     }
 
+    fun update(foundBooks : ArrayList<Book>){
+        auxArrayBooks2 = foundBooks
+        notifyDataSetChanged()
+    }
+
 }
