@@ -25,7 +25,7 @@ private const val userLogeado = "asdasd"
 
 class DetailBook : Fragment() {
 
-    var libro = "dsns"
+    lateinit var libro:Book
     var user = "dfskjf"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,7 +37,7 @@ class DetailBook : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            //libro = it.getParcelable(bookRecibido)
+            libro = it.getParcelable<Book>(bookRecibido)!!
             user = it.getString(userLogeado)!!
         }
     }
@@ -89,7 +89,9 @@ class DetailBook : Fragment() {
         sharedPref.edit().putString("FAVBOOKS$user", jsonAdd).apply()
 
 
-        titulo.text = libro
+        titulo.text = libro.titulo
+        descripcion.text = libro.descripcion
+        //imagen = libro.linkImage
     }
 
 
