@@ -53,8 +53,11 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
         val type = object: TypeToken<ArrayList<Book>>() {}.type
         val gson = Gson()
         val json = sharedPref.getString("FAVBOOKS$user", null)
+        var nuevoFav:ArrayList<Book> = ArrayList<Book>()
 
-        val nuevoFav:ArrayList<Book> = gson.fromJson(json, type)
+        if(json != null){
+            nuevoFav = gson.fromJson(json, type)
+        }
 
         customAdapter = Adapter(context!!, nuevoFav)
 

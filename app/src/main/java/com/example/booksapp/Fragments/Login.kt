@@ -65,7 +65,10 @@ class Login : Fragment() {
         ///get data
         if(sharedPref != null) {
             val outputMap: HashMap<String, String> = HashMap()
-            val jsonString = sharedPref.getString("Usuarios", null)
+            var jsonString = sharedPref.getString("Usuarios", null)
+            if(jsonString == null) {
+                jsonString = "{admin=admin, contra_admin=12345678}"
+            }
             val jsonObject = JSONObject(jsonString)
             //iteramos el jsonObject para obtener todos sus claves y valores
             val keysItr = jsonObject.keys()
