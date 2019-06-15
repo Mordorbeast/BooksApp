@@ -49,7 +49,7 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, Results
     private fun openDetail() {
         if(isLargeScreen()){
             val detailLarge = DetailBook.newInstance(userLogeado, bookRecibido)
-            supportFragmentManager.beginTransaction().add(R.id.detailLarge, detailLarge).addToBackStack(null).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.detailLarge, detailLarge).addToBackStack(null).commit()
         }else{
             val detail = DetailBook.newInstance(userLogeado, bookRecibido)
             supportFragmentManager.beginTransaction().replace(R.id.menu_container, detail).addToBackStack(null).commit()
