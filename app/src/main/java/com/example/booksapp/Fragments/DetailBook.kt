@@ -45,9 +45,6 @@ class DetailBook : Fragment() {
         return when (item.itemId) {
             com.example.booksapp.R.id.addFav_actionbar
             -> {
-                val toast = Toast.makeText(context,"Añadido a favorito", Toast.LENGTH_SHORT)
-                toast.show()
-
                 val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
 
                 val type = object: TypeToken<ArrayList<Book>>() {}.type
@@ -59,8 +56,12 @@ class DetailBook : Fragment() {
 
                     if (json.contains(libro.titulo)) {
                         nuevoFav.remove(Book(libro.titulo, libro.descripcion, libro.linkImage))
+                        val toast = Toast.makeText(context,getString(R.string.borrar_fav), Toast.LENGTH_SHORT)
+                        toast.show()
                     } else {
                         nuevoFav.add(Book(libro.titulo, libro.descripcion, libro.linkImage))
+                        val toast = Toast.makeText(context,getString(R.string.anadir_fav), Toast.LENGTH_SHORT)
+                        toast.show()
                     }
                     val jsonChange = gson.toJson(nuevoFav)
                     sharedPref.edit().putString("FAVBOOKS$user", jsonChange).apply()
