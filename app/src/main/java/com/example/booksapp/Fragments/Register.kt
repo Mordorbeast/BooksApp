@@ -8,8 +8,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.example.booksapp.Model.User
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fragment_register.*
 import org.json.JSONObject
@@ -19,8 +17,7 @@ import android.util.Log
 class Register : Fragment() {
 
     private lateinit var listener : OnButtonPressedListener
-    var listUsers:ArrayList<User> = ArrayList()
-    var nombreRepe = false
+    private var nombreRepe = false
 
     interface OnButtonPressedListener {
         fun onButtonPressed(text: String)
@@ -89,8 +86,7 @@ class Register : Fragment() {
 
     fun registrarUsuario(nombre: String, contrasena: String) {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        //val user = User(nombreR.text.toString(), ContrasenaR.text.toString())
-        //listUsers.add(user!!)
+
         if(sharedPref != null) {
             val outputMap: HashMap<String, String> = HashMap()
             var jsonStringR = sharedPref.getString("Usuarios", null)
@@ -103,7 +99,7 @@ class Register : Fragment() {
                 Log.d("Register", jsonStringR)
 
                 //Si el nombre user introducido es igual a uno guardado en shared preferences no deja registrarse
-                if (!jsonStringR!!.contains(nombreR.text.toString())) {
+                if (!jsonStringR.contains(nombreR.text.toString())) {
                     nombreRepe = false
                     //iteramos el jsonObject para obtener todos sus claves y valores
                     val keysItr = jsonObjectR.keys()

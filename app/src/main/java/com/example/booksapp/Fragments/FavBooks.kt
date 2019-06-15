@@ -49,13 +49,11 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
         super.onActivityCreated(savedInstanceState)
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        ///get data
-        val nombreUsuario = sharedPref.getString(user, null)
 
         val type = object: TypeToken<ArrayList<Book>>() {}.type
         val gson = Gson()
         val json = sharedPref.getString("FAVBOOKS$user", null)
-        var nuevoFav:ArrayList<Book> = ArrayList<Book>()
+        var nuevoFav:ArrayList<Book> = ArrayList()
 
         if(json != null){
             nuevoFav = gson.fromJson(json, type)
@@ -63,11 +61,9 @@ class FavBooks : Fragment(), SearchView.OnQueryTextListener {
 
         customAdapter = Adapter(context!!, nuevoFav)
 
-
         val listView = view!!.findViewById<ListView>(R.id.listaFavs)
 
         listView.adapter=customAdapter
-
 
         listView.setOnItemClickListener{ _, _, position, _ ->
            listener.onItemPressed(nuevoFav[position])

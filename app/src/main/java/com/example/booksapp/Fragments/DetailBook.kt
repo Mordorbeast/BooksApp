@@ -57,7 +57,7 @@ class DetailBook : Fragment() {
                 if(json!=null) {
                     val nuevoFav: ArrayList<Book> = gson.fromJson(json, type)
 
-                    if (json!!.contains(libro.titulo)) {
+                    if (json.contains(libro.titulo)) {
                         nuevoFav.remove(Book(libro.titulo, libro.descripcion, libro.linkImage))
                     } else {
                         nuevoFav.add(Book(libro.titulo, libro.descripcion, libro.linkImage))
@@ -92,16 +92,5 @@ class DetailBook : Fragment() {
 
         titulo.text = libro.titulo
         descripcion.text = libro.descripcion
-
-        //(activity as MenuBooks).supportActionBar!!.hide()
-
-
-        /////////
-
-
     }
-
-
-
-
 }

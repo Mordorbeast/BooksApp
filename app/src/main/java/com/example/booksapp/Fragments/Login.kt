@@ -9,11 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.example.booksapp.Model.User
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_register.*
 import org.json.JSONObject
 
 class Login : Fragment() {
@@ -54,7 +51,6 @@ class Login : Fragment() {
             }else{
                 nombre.error = getString(R.string.error_nombre_vacio)
             }
-
         }
     }
 
@@ -87,7 +83,6 @@ class Login : Fragment() {
                     usuarioCorrecto = true
                 } else {
                     usuarioCorrecto = false
-                    //nombre.error = getString(R.string.nombre_repe)
                 }
             }
         }

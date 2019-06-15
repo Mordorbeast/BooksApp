@@ -44,20 +44,10 @@ class MainActivity : AppCompatActivity(), Login.OnButtonPressedListener, Registe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         if(savedInstanceState == null){
             val loginFrag = Login()
             supportFragmentManager.beginTransaction().add(R.id.main_container, loginFrag).commit()
         }
-        buscarLibros()
     }
 
-    /**
-     * Con la palaba/palabras clave introducidas en la barra de busqueda abre una nueva pantalla
-     * que cargara la lista con los resultados
-     *
-     */
-    fun buscarLibros(){
-
-    }
 }

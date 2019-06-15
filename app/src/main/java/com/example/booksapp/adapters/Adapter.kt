@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.bumptech.glide.Glide
 import com.example.booksapp.Model.Book
 import com.example.booksapp.R
 import kotlinx.android.synthetic.main.fila_listview_fav.view.*
@@ -13,7 +14,6 @@ class Adapter(private val context: Context, books: ArrayList<Book>) : BaseAdapte
 
     private var auxArrayBooks: ArrayList<Book> = arrayListOf(Book("","", ""))
     private var auxArrayBooks2: java.util.ArrayList<Book> = books
-    //private var ingredientesReceta: ArrayList<Alimento> = arrayListOf(Alimento("","",""))
 
     init {
         auxArrayBooks.clear()
@@ -21,10 +21,6 @@ class Adapter(private val context: Context, books: ArrayList<Book>) : BaseAdapte
     }
 
     override fun getView(position: Int, convertView: View?, viewGroup: ViewGroup?): View {
-
-        //val layoutInflater = LayoutInflater.from(context)
-        //val fila = viewGrup?: layoutInflater.inflate(R.layout.fila_listview_fav, viewGroup, false)
-
 
         val fila: View
 
@@ -35,17 +31,11 @@ class Adapter(private val context: Context, books: ArrayList<Book>) : BaseAdapte
             convertView
         }
 
-            //fila.imagenFilaFav.setImage(auxArrayBooks2[position].linkImagen)
-            fila.tituloFav.text = auxArrayBooks2[position].titulo
+        Glide.with(context)
+            .load(auxArrayBooks2[position].linkImage)
+            .into(fila.imagenFilaFav)
 
-
-
-
-
-
-
-        //cada vez que se llama al adapter hace esto y suma al texto los autores todoo el rato :V
-
+        fila.tituloFav.text = auxArrayBooks2[position].titulo
 
         return fila
     }
@@ -80,10 +70,4 @@ class Adapter(private val context: Context, books: ArrayList<Book>) : BaseAdapte
 
         notifyDataSetChanged()
     }
-
-    fun update(foundBooks : ArrayList<Book>){
-        auxArrayBooks2 = foundBooks
-        notifyDataSetChanged()
-    }
-
 }

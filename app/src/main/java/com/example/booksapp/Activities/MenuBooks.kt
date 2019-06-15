@@ -9,7 +9,6 @@ import com.example.booksapp.Model.Book
 import com.example.booksapp.R
 import android.content.SharedPreferences.Editor as SharedPreferencesEditor
 
-
 class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, ResultsBooks.OnButtonPressedListener {
 
     private lateinit var bookRecibido: Book
@@ -25,15 +24,10 @@ class MenuBooks : AppCompatActivity(), FavBooks.OnButtonPressedListener, Results
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        setTheme(R.style.AppThemeNo)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_books)
 
         userLogeado = intent.getStringExtra(("USERNAME"))
-
-
-//        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
-//        setSupportActionBar(toolbar)
 
         if (savedInstanceState == null) {
             if(isLargeScreen()){
